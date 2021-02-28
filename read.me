@@ -9,4 +9,9 @@
 1. HttpSecurity
     - antMatchers: 제외할 항목을 입력 한다.
         - .antMatchers("/", "index", "/css/*", "/js/*")
+
+2. UserDetailsService
+    - 우리는 DB 등에서 사용자 리소스를 조화 하게 되므로 그 때 사용
+    - Interface 이며 구현체로는 InMemoryUserDetailsManager 등이 있다. 필요에 맞게 사용.
+    - password 는 필히 Hash 하여 저장 하여야 한다.
 ###
