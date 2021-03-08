@@ -1,36 +1,29 @@
 package com.example.demo.student;
 
-
 public class Student {
 
-    private final int studentId;
-    private final String name;
-    private final int age;
+    private final Integer studentId;
+    private final String studentName;
 
-    public Student(int studentId, String name, int age) {
+    public Student(Integer studentId,
+                   String studentName) {
         this.studentId = studentId;
-        this.name = name;
-        this.age = age;
+        this.studentName = studentName;
     }
 
-    public int getStudentId() {
+    public Integer getStudentId() {
         return studentId;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public int getAge() {
-        return age;
+    public String getStudentName() {
+        return studentName;
     }
 
     @Override
     public String toString() {
         return "Student{" +
                 "studentId=" + studentId +
-                ", name='" + name + '\'' +
-                ", age=" + age +
+                ", studentName='" + studentName + '\'' +
                 '}';
     }
 }

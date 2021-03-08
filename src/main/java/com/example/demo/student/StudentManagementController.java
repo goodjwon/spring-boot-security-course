@@ -9,44 +9,39 @@ import java.util.List;
 @RestController
 @RequestMapping("management/api/v1/students")
 public class StudentManagementController {
+
     private static final List<Student> STUDENTS = Arrays.asList(
-            new Student(1, "jake", 16),
-            new Student(2, "poll", 15),
-            new Student(3, "sopia", 17)
+            new Student(1, "James Bond"),
+            new Student(2, "Maria Jones"),
+            new Student(3, "Anna Smith")
     );
 
+//    hasRole('ROLE_') hasAnyRole('ROLE_') hasAuthority('permission') hasAnyAuthority('permission')
+
     @GetMapping
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN, ROLE_ADMIN_TRAINEE')")
-    public List<Student> getAllStudents(){
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ADMINTRAINEE')")
+    public List<Student> getAllStudents() {
         System.out.println("getAllStudents");
         return STUDENTS;
     }
 
-    @GetMapping(path="{studentId}")
-    public Student getStudent(@PathVariable("studentId") Integer studentId){
-        return STUDENTS.stream()
-                .filter(student -> studentId.equals(student.getStudentId()))
-                .findFirst()
-                .orElseThrow(()-> new IllegalStateException("Student" + studentId + "does not exists!!") );
-    }
-
     @PostMapping
-    @PreAuthorize("hasAnyAuthority('student:write')")
-    public void registerNewStudent(@RequestBody Student student){
+    @PreAuthorize("hasAuthority('student:write')")
+    public void registerNewStudent(@RequestBody Student student) {
         System.out.println("registerNewStudent");
         System.out.println(student);
     }
 
     @DeleteMapping(path = "{studentId}")
-    @PreAuthorize("hasAnyAuthority('student:write')")
+    @PreAuthorize("hasAuthority('student:write')")
     public void deleteStudent(@PathVariable("studentId") Integer studentId) {
         System.out.println("deleteStudent");
         System.out.println(studentId);
     }
 
     @PutMapping(path = "{studentId}")
-    @PreAuthorize("hasAnyAuthority('student:write')")
-    public void updateStudent(@PathVariable Integer studentId, @RequestBody Student student){
+    @PreAuthorize("hasAuthority('student:write')")
+    public void updateStudent(@PathVariable("studentId") Integer studentId, @RequestBody Student student) {
         System.out.println("updateStudent");
         System.out.println(String.format("%s %s", studentId, student));
     }
