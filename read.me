@@ -15,4 +15,16 @@
     - Interface 이며 구현체로는 InMemoryUserDetailsManager 등이 있다. 필요에 맞게 사용.
     - password 는 필히 Hash 하여 저장 하여야 한다. 이를 위해서 PasswordConfig를 구현하여 Bean에 등록한다.
         - passwordEncoder.encode 에 break point 를 설정 후 Debugger mode 로 실행하고 계산기 모양을 누르면 여러가지 값 입력이 가능하다.
+
+3. 인증방법
+    - httpBasic: API 에서 사용
+    - formLogin: 사용자 인터페이스 활성화 됨.. 사용자용.
+        - UserName & password base
+        - Standard in most websites
+        - Can logout
+        - HTTPS recommended
+    - logout: 로그아웃에 대해 보안처리를 위해 아래와 같이 추가 하면 좋다.
+        - .clearAuthentication(true)
+        - .invalidateHttpSession(true)
+        - .deleteCookies("JSESSIONID", "remember-me")
 ###
